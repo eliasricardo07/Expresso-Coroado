@@ -87,8 +87,9 @@ body {
 }
 
 .rodape {
-  font-size: 12px;
+  font-size: 14px;
   color: #777;
+  font-weight: bold;
 }
 
 /* Efeito de subir a página vindo de baixo no carregamento */
