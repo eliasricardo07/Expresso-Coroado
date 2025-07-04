@@ -21,16 +21,24 @@ body {
   width: 100%;
 }
 
+/* Logo – centralizada e com distância curta do título */
 .logo {
-  max-width: 160px;
-  margin-bottom: 50px;
+  max-width: 160px;     /* tamanho igual */
+  display: block;       /* mantém como bloco */
+  margin: 0 auto 12px;  /* ←→ auto = centraliza, 12 px embaixo */
 }
 
+
+
+/* Título – mantém fonte; zera a margem de cima */
 .titulo {
   color: #f45c00;
-  font-size: 24px;
-  margin-bottom: 30px;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 0;      /* ↑ remove a folga de cima do <h1>/<h2> */
+  margin-bottom: 30px;/* deixa o respiro para o conteúdo seguinte */
 }
+
 
 .botao {
   display: block;
@@ -88,7 +96,7 @@ body {
 
 .rodape {
   font-size: 14px;
-  color: #777;
+  color: #b15e00;
   font-weight: bold;
 }
 
