@@ -9,6 +9,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
+  <!-- Tela de entrada (pop-up) -->
+<div id="popup-form" class="popup-overlay">
+  <div class="popup-box">
+    <h2>Bem-vindo!</h2>
+    <p>Preencha seus dados para continuar:</p>
+    <form id="form-contato">
+      <input type="text" id="nome" placeholder="Seu nome" required />
+      <input type="email" id="email" placeholder="Seu email" required />
+      <button type="submit">Continuar</button>
+    </form>
+  </div>
+</div>
+
   <div class="container">
     <div class="card">
       <img src="logo.jpg.jpg" alt="Logo Expresso Coroado" class="logo" />
@@ -42,5 +55,48 @@
       <p class="rodape"> Expresso Coroado, transportando vidas com qualidade, segurança e conforto </p>
     </div>
   </div>
-</body>
+
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAIBYBuebs9eN1InMEyVm2cauEjbs2uwBE",
+    authDomain: "expresso-coroado.firebaseapp.com",
+    projectId: "expresso-coroado",
+    storageBucket: "expresso-coroado.firebasestorage.app",
+    messagingSenderId: "966340279007",
+    appId: "1:966340279007:web:e26a146f017050f7e5c76a",
+    measurementId: "G-7B5525KWBX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  async function salvarDados(nome, email) {
+    try {
+      await addDoc(collection(db, "acessos"), {
+        nome: nome,
+        email: email,
+        dataHora: serverTimestamp()
+      });
+    } catch (e) {
+      console.error("Erro ao salvar dados:", e);
+    }
+  }
+
+  // Quando o formulário for enviado
+  document.getElementById("form-contato").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+
+    salvarDados(nome, email).then(() => {
+      // Esconde o pop-up e mostra o site
+      document.getElementById("popup-form").style.display = "none";
+      document.body.classList.add("loaded");
+    });
+  });
+     </script>
+   </body>
 </html>
